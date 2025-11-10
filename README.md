@@ -1,1 +1,1 @@
-# HydraGNN
+# HydraGCN
