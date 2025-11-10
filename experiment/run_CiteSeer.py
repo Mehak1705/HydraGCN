@@ -10,9 +10,6 @@ import matplotlib.pyplot as plt
 
 from models.GCN import GCN
 from models.MLP import MLP
-from models.SAGE import SAGE
-from models.GAT import GAT
-from models.GPR import GPRNet
 from poisoning.poisoning import apply_poisoning
 from defense.pruning import prune_and_restore_edges
 from defense.bayesian import bayesian_predict
@@ -24,12 +21,6 @@ from utils.data_utils import load_data
 def get_model(model_name, in_channels, hidden_channels, out_channels):
     if model_name.lower() == 'gcn':
         return GCN(in_channels, hidden_channels, out_channels)
-    elif model_name.lower() == 'gat':
-        return GAT(in_channels, hidden_channels, out_channels, heads=8) 
-    elif model_name.lower() == 'sage':
-        return SAGE(in_channels, hidden_channels, out_channels)
-    elif model_name.lower() == 'gpr':
-        return GPRNet(in_channels, hidden_channels, out_channels, K=10, alpha=0.1, init='PPR') 
     elif model_name.lower() == 'mlp':
         return MLP(in_channels, out_channels)
     else:
@@ -217,7 +208,7 @@ def run_experiment(model_name, poisoning_rate, target_class):
 
 
 if __name__ == "__main__":
-    model_names_to_run = ['gcn', 'gat', 'sage', 'gpr', 'mlp']
+    model_names_to_run = ['gcn', 'mlp']
     poisoning_rates = [0.01, 0.05, 0.10, 0.20, 0.50, 0.80]
     target_class = 0
     
